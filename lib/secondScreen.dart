@@ -48,7 +48,6 @@ class secondScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Container(
-                padding: EdgeInsets.only(top: 3, left: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
                   border: Border(
@@ -63,7 +62,7 @@ class secondScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   height: 60,
-                  color: Colors.redAccent,
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   child: Text("Back"),
