@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:details_application/secondScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +31,7 @@ class myHomePage extends StatefulWidget {
 
 class _myHomePage extends State<myHomePage> {
   var visible = false;
+  bool isLoading = false;
   final _controller = TextEditingController();
   final _phone = TextEditingController();
   final _email = TextEditingController();
@@ -69,7 +72,7 @@ class _myHomePage extends State<myHomePage> {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: loadProgress,
+          onPressed: () {},
         ),
       ),
       body: SafeArea(
@@ -198,74 +201,93 @@ class _myHomePage extends State<myHomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    border: const Border(
-                      top: BorderSide(color: Colors.black),
-                      bottom: BorderSide(color: Colors.black),
-                      left: BorderSide(color: Colors.black),
-                      right: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                  child: MaterialButton(
-                    minWidth: double.infinity,
-                    onPressed: () {
-                      final text = _controller.value.text;
-                      final phone = _phone.value.text;
-                      final email = _email.value.text;
-                      final nameRegExp = RegExp(r"^[a-zA-Z ]*$");
-                      final phoneRegExp = RegExp(r"^\d{10}$");
-                      final emailRegExp =
-                          RegExp(r"^[a-zA-Z\d.]+@[a-zA-Z\d]+\.[a-zA-Z]+");
-                      if (text.isEmpty) {
-                        showSnackBar(
-                            label: "Please enter name!", context: context);
-                        focusNode1.requestFocus();
-                      } else if (!nameRegExp.hasMatch(text)) {
-                        showSnackBar(
-                            label: "Please enter valid name!",
-                            context: context);
-                        focusNode1.requestFocus();
-                      } else if (email.isEmpty) {
-                        showSnackBar(
-                            label: "Please enter email!", context: context);
-                        focusNode2.requestFocus();
-                      } else if (!emailRegExp.hasMatch(email)) {
-                        showSnackBar(
-                            label: "Please enter valid email!",
-                            context: context);
-                        focusNode2.requestFocus();
-                      } else if (phone.isEmpty) {
-                        showSnackBar(
-                            label: "Please enter phone number!",
-                            context: context);
-                        focusNode3.requestFocus();
-                      } else if (!emailRegExp.hasMatch(email)) {
-                        showSnackBar(
-                            label: "Please enter valid phone number!",
-                            context: context);
-                        focusNode3.requestFocus();
-                      } else {
-                        FocusManager.instance.primaryFocus!.unfocus();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => secondScreen(
-                                    name: text, email: email, phone: phone)));
-                      }
-                    },
-                    height: 60,
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40)),
-                    child: const Text(
-                      "Submit",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    ),
-                  ),
-                ),
+                child: isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.redAccent,
+                        strokeWidth: 5.0,
+                      )
+                    : Container(
+                        padding: const EdgeInsets.only(top: 3, left: 3),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          border: const Border(
+                            top: BorderSide(color: Colors.black),
+                            bottom: BorderSide(color: Colors.black),
+                            left: BorderSide(color: Colors.black),
+                            right: BorderSide(color: Colors.black),
+                          ),
+                        ),
+                        child: MaterialButton(
+                          minWidth: double.infinity,
+                          onPressed: () {
+                            final text = _controller.value.text;
+                            final phone = _phone.value.text;
+                            final email = _email.value.text;
+                            final nameRegExp = RegExp(r"^[a-zA-Z ]*$");
+                            final phoneRegExp = RegExp(r"^\d{10}$");
+                            final emailRegExp =
+                                RegExp(r"^[a-zA-Z\d.]+@[a-zA-Z\d]+\.[a-zA-Z]+");
+                            if (text.isEmpty) {
+                              showSnackBar(
+                                  label: "Please enter name!",
+                                  context: context);
+                              focusNode1.requestFocus();
+                            } else if (!nameRegExp.hasMatch(text)) {
+                              showSnackBar(
+                                  label: "Please enter valid name!",
+                                  context: context);
+                              focusNode1.requestFocus();
+                            } else if (email.isEmpty) {
+                              showSnackBar(
+                                  label: "Please enter email!",
+                                  context: context);
+                              focusNode2.requestFocus();
+                            } else if (!emailRegExp.hasMatch(email)) {
+                              showSnackBar(
+                                  label: "Please enter valid email!",
+                                  context: context);
+                              focusNode2.requestFocus();
+                            } else if (phone.isEmpty) {
+                              showSnackBar(
+                                  label: "Please enter phone number!",
+                                  context: context);
+                              focusNode3.requestFocus();
+                            } else if (!phoneRegExp.hasMatch(phone)) {
+                              showSnackBar(
+                                  label: "Please enter valid phone number!",
+                                  context: context);
+                              focusNode3.requestFocus();
+                            } else {
+                              FocusManager.instance.primaryFocus!.unfocus();
+                              if (isLoading) return;
+                              setState(() {
+                                isLoading = true;
+                              });
+                              Timer(
+                                  const Duration(seconds: 3),
+                                  () =>
+                                      Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => secondScreen(
+                                              name: text,
+                                              email: email,
+                                              phone: phone))));
+                            }
+                          },
+                          height: 60,
+                          color: Colors.redAccent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40)),
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16),
+                          ),
+                        ),
+                      ),
               ),
               const SizedBox(
                 height: 20,

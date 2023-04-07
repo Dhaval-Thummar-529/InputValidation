@@ -13,7 +13,7 @@ class secondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Screen"),
+        title: const Text("Second Screen"),
         backgroundColor: Colors.red,
       ),
       body: Center(
@@ -23,34 +23,41 @@ class secondScreen extends StatelessWidget {
           children: [
             Text(
               name,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.redAccent),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               email,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.redAccent),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               phone,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.redAccent),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Container(
+                padding: const EdgeInsets.only(top: 3, left: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  border: Border(
+                  border: const Border(
                     top: BorderSide(color: Colors.black),
                     bottom: BorderSide(color: Colors.black),
                     left: BorderSide(color: Colors.black),
@@ -62,14 +69,20 @@ class secondScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   height: 60,
-                  color: Colors.white,
+                  color: Colors.redAccent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
-                  child: Text("Back"),
+                  child: const Text("Back",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16)),
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
