@@ -1,16 +1,8 @@
 # details_application
 
-A new Flutter project.
+Flutter Project for Validating TextFields using Regular Expression and Sending Data from one screen to other.
 
-## Getting Started
+![image](https://user-images.githubusercontent.com/68733763/230392858-e6850f40-159f-4a6d-9e76-43c34f2cb191.png)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![image](https://user-images.githubusercontent.com/68733763/230392975-fe1b7368-c8cb-425a-ba06-cc7a165c222f.png)
