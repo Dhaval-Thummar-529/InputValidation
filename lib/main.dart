@@ -107,6 +107,7 @@ class _myHomePage extends State<myHomePage> {
                         ),
                         TextField(
                           controller: _controller,
+                          enabled: isLoading ? false : true,
                           focusNode: focusNode1,
                           keyboardType: TextInputType.name,
                           textInputAction: TextInputAction.next,
@@ -141,6 +142,7 @@ class _myHomePage extends State<myHomePage> {
                         ),
                         TextField(
                           controller: _email,
+                          enabled: isLoading ? false : true,
                           focusNode: focusNode2,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
@@ -175,6 +177,7 @@ class _myHomePage extends State<myHomePage> {
                         ),
                         TextField(
                           controller: _phone,
+                          enabled: isLoading ? false : true,
                           focusNode: focusNode3,
                           maxLength: 10,
                           keyboardType: TextInputType.phone,
@@ -265,14 +268,21 @@ class _myHomePage extends State<myHomePage> {
                               });
                               Timer(
                                   const Duration(seconds: 3),
-                                  () =>
-                                      Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => secondScreen(
-                                              name: text,
-                                              email: email,
-                                              phone: phone))));
+                                  () => {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    secondScreen(
+                                                        name: text,
+                                                        email: email,
+                                                        phone: phone))),
+                                        Timer(
+                                            const Duration(seconds: 1),
+                                            () => setState(() {
+                                                  isLoading = false;
+                                                }))
+                                      });
                             }
                           },
                           height: 60,
