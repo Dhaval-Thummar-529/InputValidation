@@ -278,8 +278,11 @@ class _myHomePage extends State<myHomePage> {
                                                         email: email,
                                                         phone: phone))),
                                         Timer(
-                                            const Duration(seconds: 1),
+                                            const Duration(milliseconds: 500),
                                             () => setState(() {
+                                                  _controller.text = "";
+                                                  _email.text = "";
+                                                  _phone.text = "";
                                                   isLoading = false;
                                                 }))
                                       });
